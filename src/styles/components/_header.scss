@@ -1,3 +1,5 @@
+@use '../mixin' as *;
+
 .header {
   background: var(--cl-white);
   display: flex;
