@@ -12,23 +12,23 @@ export default function Header() {
       </div>
       <div className='header-content'>
         <div className='menu'>
-          <div className='font-500'>Home</div>
-          <div className='font-500'>Shop</div>
-          <div className='font-500'>About</div>
-          <div className='font-500'>Contact</div>
+          <div className='font-500 cur-pointer'>Home</div>
+          <div className='font-500 cur-pointer'>Shop</div>
+          <div className='font-500 cur-pointer'>About</div>
+          <div className='font-500 cur-pointer'>Contact</div>
         </div>
         <div className='header-action'>
           <div>
-            <img src={userIcon} alt='' />
+            <img className='cur-pointer' src={userIcon} alt='' />
           </div>
           <div>
-            <img src={searchIcon} alt='' />
+            <img className='cur-pointer' src={searchIcon} alt='' />
           </div>
           <div>
-            <img src={favoriteIcon} alt='' />
+            <img className='cur-pointer' src={favoriteIcon} alt='' />
           </div>
           <div>
-            <img src={shoppingCartIcon} alt='' />
+            <img className='cur-pointer' src={shoppingCartIcon} alt='' />
           </div>
         </div>
       </div>
