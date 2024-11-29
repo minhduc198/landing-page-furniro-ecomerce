@@ -1,0 +1,25 @@
+.header {
+  background: var(--cl-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 29px 100px 30px 54px;
+
+  &-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 158px;
+  }
+
+  .menu {
+    display: flex;
+    gap: 75px;
+  }
+
+  &-action {
+    display: flex;
+    gap: 45px;
+  }
+}
