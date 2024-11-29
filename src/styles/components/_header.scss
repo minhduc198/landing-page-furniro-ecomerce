@@ -1,3 +1,5 @@
+@use '../mixin' as *;
+
 .header {
   background: var(--cl-white);
   display: flex;
@@ -21,5 +23,94 @@
   &-action {
     display: flex;
     gap: 45px;
+  }
+
+  .hamburger-menu {
+    display: none;
+  }
+}
+
+@include responsive(LG) {
+  .header-content {
+    gap: 100px;
+  }
+
+  .header-action {
+    gap: 30px;
+  }
+  .header {
+    .menu {
+      gap: 30px;
+    }
+  }
+}
+
+@include responsive(MD) {
+  .header {
+    flex-direction: column;
+    padding: 29px 50px 30px 50px;
+
+    &-content {
+      flex-direction: column;
+      gap: 30px;
+      margin-top: 30px;
+    }
+  }
+}
+
+@include responsive(SM) {
+  .header-content {
+    flex-direction: column;
+    gap: 30px;
+    align-items: start;
+    justify-content: start;
+    position: absolute;
+    inset: 0;
+    width: max(260px, 70%);
+    background: var(--cl-white);
+    padding: 40px 0 0 20px;
+    margin-top: 0;
+    transform: translateX(-100%);
+    transition: all 0.2s linear;
+    box-shadow: 5px 5px 50px rgb(192, 191, 191);
+
+    .menu,
+    .header-action {
+      opacity: 0;
+    }
+  }
+
+  .active-menu {
+    transform: translateX(0);
+    .menu,
+    .header-action {
+      opacity: 1;
+    }
+  }
+
+  .header {
+    padding: 29px 35px 30px 35px;
+    border-bottom: 1px solid rgb(148, 148, 148);
+    flex-direction: row;
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 45px;
+      width: 100%;
+
+      .transform {
+        padding: 10px 0;
+      }
+
+      .transform:hover {
+        transition: all 0.2s linear;
+        transform: translateX(10px);
+        text-decoration: underline;
+      }
+    }
+
+    .hamburger-menu {
+      display: flex;
+    }
   }
 }
