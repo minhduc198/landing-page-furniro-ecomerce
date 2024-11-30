@@ -1,53 +1,62 @@
-import logoFull from '../../assets/header/icons/logo-full.svg'
-import userIcon from '../../assets/header/icons/icon-profile.svg'
-import searchIcon from '../../assets/header/icons/search.svg'
-import favoriteIcon from '../../assets/header/icons/favourite.svg'
-import shoppingCartIcon from '../../assets/header/icons/buy.svg'
-import { ImCancelCircle } from 'react-icons/im'
+import React, { useState } from 'react'
+import { IoCloseOutline } from 'react-icons/io5'
 import { RxHamburgerMenu } from 'react-icons/rx'
-import { useRef, useState } from 'react'
+import shoppingCartIcon from '../../assets/header/icons/buy.svg'
+import favoriteIcon from '../../assets/header/icons/favourite.svg'
+import userIcon from '../../assets/header/icons/icon-profile.svg'
+import logoFull from '../../assets/header/icons/logo-full.svg'
+import searchIcon from '../../assets/header/icons/search.svg'
 
 export default function Header() {
-  const hamburgerMenu: any = useRef(null)
-  const [action, setAction] = useState(false)
+  const [openMenu, setOpenMenu] = useState(false)
 
-  const toggleMenu = () => {
-    if (hamburgerMenu.current) {
-      hamburgerMenu.current.classList.toggle('active-menu')
-    }
-    setAction(!action)
-  }
+  const toggleMenu = () => setOpenMenu(!openMenu)
 
   return (
-    <div className='header'>
-      <div>
-        <img src={logoFull} alt='' />
-      </div>
-      <div className='hamburger-menu cur-pointer' onClick={toggleMenu}>
-        {action ? <ImCancelCircle size={25} /> : <RxHamburgerMenu size={25} />}
-      </div>
-      <div className='header-content' ref={hamburgerMenu}>
-        <div className='menu'>
-          <div className='font-500 cur-pointer transform'>Home</div>
-          <div className='font-500 cur-pointer transform'>Shop</div>
-          <div className='font-500 cur-pointer transform'>About</div>
-          <div className='font-500 cur-pointer transform'>Contact</div>
+    <React.Fragment>
+      <div className='header'>
+        <div>
+          <img src={logoFull} alt='' />
         </div>
-        <div className='header-action'>
-          <div>
-            <img className='cur-pointer' src={userIcon} alt='' />
+        {!openMenu && (
+          <div className='hamburger-menu cursor-pointer' onClick={toggleMenu}>
+            <RxHamburgerMenu size={25} />
           </div>
-          <div>
-            <img className='cur-pointer' src={searchIcon} alt='' />
+        )}
+        <div className={`header-content ${openMenu ? 'header-content-active' : ''}`}>
+          <div className='menu'>
+            <div className='header-mobile'>
+              <div>
+                <img src={logoFull} alt='' />
+              </div>
+              {openMenu && (
+                <div className='hamburger-menu cursor-pointer' onClick={toggleMenu}>
+                  <IoCloseOutline size={35} />
+                </div>
+              )}
+            </div>
+            <div className='menu-item font-500 cursor-pointer'>Home</div>
+            <div className='menu-item font-500 cursor-pointer'>Shop</div>
+            <div className='menu-item font-500 cursor-pointer'>About</div>
+            <div className='menu-item font-500 cursor-pointer'>Contact</div>
           </div>
-          <div>
-            <img className='cur-pointer' src={favoriteIcon} alt='' />
-          </div>
-          <div>
-            <img className='cur-pointer' src={shoppingCartIcon} alt='' />
+          <div className='header-action'>
+            <div>
+              <img className='cursor-pointer' src={userIcon} alt='' />
+            </div>
+            <div>
+              <img className='cursor-pointer' src={searchIcon} alt='' />
+            </div>
+            <div>
+              <img className='cursor-pointer' src={favoriteIcon} alt='' />
+            </div>
+            <div>
+              <img className='cursor-pointer' src={shoppingCartIcon} alt='' />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      {openMenu && <div className='header-overlay' onClick={toggleMenu}></div>}
+    </React.Fragment>
   )
 }
