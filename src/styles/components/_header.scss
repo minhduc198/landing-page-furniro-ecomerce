@@ -1,0 +1,128 @@
+@use '../mixin' as *;
+
+.header {
+  background: var(--cl-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 29px 100px 30px 54px;
+
+  &-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 158px;
+  }
+
+  .menu {
+    display: flex;
+    gap: 75px;
+  }
+
+  &-action {
+    display: flex;
+    gap: 45px;
+  }
+
+  &-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cl-black);
+    opacity: 0.2;
+    z-index: 5;
+  }
+
+  .hamburger-menu,
+  &-mobile {
+    display: none;
+  }
+}
+
+@include responsive(LG) {
+  .header {
+    &-content {
+      column-gap: 100px;
+    }
+
+    &-action,
+    .menu {
+      column-gap: 30px;
+    }
+  }
+}
+
+@include responsive(MD) {
+  .header {
+    flex-direction: column;
+    row-gap: 30px;
+    padding: 29px 50px 30px 50px;
+  }
+}
+
+@include responsive(SM) {
+  .header {
+    padding: 29px 35px 30px 35px;
+    flex-direction: row;
+
+    .hamburger-menu {
+      display: block;
+    }
+
+    &-mobile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-inline: 20px;
+      margin-bottom: 20px;
+    }
+
+    &-content {
+      flex-direction: column;
+      align-items: start;
+      justify-content: space-between;
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      width: max(220px, 70%);
+      background: var(--cl-white);
+      padding: 40px 0 20px;
+      margin-top: 0;
+      transform: translateX(-100%);
+      transition: all 0.3s linear;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      opacity: 0;
+
+      &-active {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    &-action {
+      width: 100%;
+      gap: 0;
+      justify-content: space-evenly;
+      padding-top: 30px;
+      border-top: 1px solid var(--cl-gray);
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+
+      &-item {
+        padding: 30px 20px;
+        transition: all 0.2s linear;
+
+        &:hover {
+          background: var(--cl-gray-light);
+        }
+      }
+    }
+  }
+}
