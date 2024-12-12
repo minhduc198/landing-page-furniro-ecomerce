@@ -7,13 +7,16 @@ import ProductCard from '../../components/ProductCard'
 import { useEffect, useState } from 'react'
 import { IDataProduct } from '../../types'
 import { getListProduct } from '../../services'
+import { MAX_OUR_PRODUCTS } from '../../constants'
 
+let limit = 0
 export default function Home() {
   const navigate = useNavigate()
   const [ourProducts, setOurProducts] = useState<IDataProduct[]>([])
 
   const getData = async () => {
-    const productData = await getListProduct(1, 8)
+    limit = limit < MAX_OUR_PRODUCTS ? limit + 8 : 8
+    const productData = await getListProduct(1, limit)
     setOurProducts(productData.data)
   }
 
@@ -72,6 +75,9 @@ export default function Home() {
           {ourProducts.map((productItem: IDataProduct) => (
             <ProductCard key={productItem.id} productItem={productItem} />
           ))}
+        </div>
+        <div className='btn-show-more' onClick={() => getData()}>
+          {ourProducts.length < MAX_OUR_PRODUCTS ? 'Show More' : 'Show Less'}
         </div>
       </div>
     </div>
